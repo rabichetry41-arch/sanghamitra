@@ -1,5 +1,5 @@
 // ==================== CONSTANTS ====================
-const WHATSAPP_NUMBER = "919876543210"; // ← CHANGE THIS TO YOUR REAL NUMBER
+const WHATSAPP_NUMBER = "919395045293"; // ← CHANGE THIS TO YOUR REAL NUMBER
 
 // ==================== STATE & DOM CACHE ====================
 let cart = JSON.parse(localStorage.getItem('sanghamitraCart')) || [];
