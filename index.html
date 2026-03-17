@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanghamitra • Pure Dairy from Women Farmers of Assam</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Brand colour tokens */
+        .brand-text { color: rgba(0, 173, 239, 1); }
+        .brand-bg { background-color: rgba(0, 173, 239, 1); }
+        .brand-bg:hover { background-color: rgba(0, 140, 200, 1); }
+        .brand-border { border-color: rgba(0, 173, 239, 1); }
+        .brand-light-bg { background-color: rgba(0, 173, 239, 0.08); }
+
+        /* Page & section backgrounds */
+        body { background-color: rgba(0, 173, 239, 0.07) !important; }
+        .products-section-bg { background-color: rgba(0, 173, 239, 0.05); }
+        .cart-footer-bg { background-color: rgba(0, 173, 239, 0.08); }
+        .navbar-bg { background-color: rgba(255, 255, 255, 0.97); border-bottom: 2px solid rgba(0, 173, 239, 0.2); }
+        .mobile-menu-bg { background-color: rgba(0, 173, 239, 0.04); }
+    </style>
+</head>
+<body class="text-gray-800 overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav class="navbar-bg shadow-md fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div>
+                    <img src="https://iili.io/qWrHImF.md.jpg" alt="Sanghamitra Logo" class="w-18 h-14 object-cover">
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-10 text-sm font-medium">
+                <a href="#about" class="nav-link hover:text-[rgba(0,173,239,1)] transition">About Us</a>
+                <a href="#products" class="nav-link hover:text-[rgba(0,173,239,1)] transition">Shop</a>
+                <a href="#farmers" class="nav-link hover:text-[rgba(0,173,239,1)] transition">Our Farmers</a>
+                <a href="#gallery" class="nav-link hover:text-[rgba(0,173,239,1)] transition">Gallery</a>
+                <a href="#contact" class="nav-link hover:text-[rgba(0,173,239,1)] transition">Contact</a>
+            </div>
+
+            <div onclick="toggleCart()" class="relative cursor-pointer flex items-center gap-2 text-xl">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count" class="absolute -top-1 -right-1 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full brand-bg">0</span>
+            </div>
+
+            <button onclick="toggleMobileMenu()" class="md:hidden text-2xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden mobile-menu-bg px-6 py-6 border-t">
+            <div class="flex flex-col gap-6 text-lg font-medium">
+                <a href="#about" onclick="toggleMobileMenu()" class="nav-link hover:text-[rgba(0,173,239,1)]">About Us</a>
+                <a href="#products" onclick="toggleMobileMenu()" class="nav-link hover:text-[rgba(0,173,239,1)]">Shop</a>
+                <a href="#farmers" onclick="toggleMobileMenu()" class="nav-link hover:text-[rgba(0,173,239,1)]">Our Farmers</a>
+                <a href="#gallery" onclick="toggleMobileMenu()" class="nav-link hover:text-[rgba(0,173,239,1)]">Gallery</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="nav-link hover:text-[rgba(0,173,239,1)]">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero-bg h-screen flex items-center text-white pt-20">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+
+        <!-- Badge -->
+        <div class="hero-badge inline-block px-6 py-2 rounded-full text-xs font-medium mb-8 tracking-[0.18em]">
+            ASSAM &bull; WOMEN POWERED &bull; PURE DAIRY
+        </div>
+
+        <!-- Heading -->
+        <h1 class="heading-font leading-tight mb-2">
+            <span class="inline-block text-6xl md:text-8xl text-white drop-shadow-lg">Sanghamitra</span>
+        </h1>
+        <h2 class="heading-font leading-snug">
+            <span class="inline-block text-3xl md:text-5xl" style="color: rgba(0,173,239,1);">Pure Dairy from the Heart of Assam</span>
+        </h2>
+
+    </div>
+</section>
+
+    <!-- Products -->
+    <section id="products" class="py-20 md:py-24 products-section-bg">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="uppercase text-sm font-medium tracking-widest brand-text">Fresh from Our Women Farmers</span>
+                <h2 class="heading-font text-4xl md:text-5xl mt-3 brand-underline">Our Pure Dairy Products</h2>
+                <p class="mt-4 text-gray-600">Add to cart • Order via WhatsApp • Fresh daily delivery in Bijni & nearby</p>
+            </div>
+
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <!-- Filled by JS -->
+            </div>
+
+            <div class="text-center mt-16">
+                <p class="text-sm brand-text">💚 100% natural • No preservatives • Women SHG produced</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-20 md:py-24 section-bg">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div>
+                    <span class="uppercase text-sm font-medium tracking-widest brand-text">Our Story</span>
+                    <h2 class="heading-font text-4xl md:text-5xl mt-3 leading-tight">From Women SHGs to a Proud FPC</h2>
+                    <p class="mt-6 text-lg text-gray-700">
+                        Sanghamitra Mahila Producer Company Ltd. is a women-led Farmer Producer Company...
+                    </p>
+                </div>
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                    <img src="https://iili.io/qWrOZjs.md.jpg" alt="Women farmers group" class="w-full aspect-[4/5] object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="hidden fixed inset-0 bg-black/60 z-[100] flex items-end md:items-center justify-center">
+       <div class="cart-modal bg-white w-full max-w-md md:rounded-3xl shadow-2xl overflow-hidden flex flex-col" style="max-height: 90vh;">
+            <div class="p-6 cart-header flex justify-between items-center">
+                <h3 class="text-2xl font-semibold">Your Cart</h3>
+                <button onclick="toggleCart()" class="text-3xl leading-none hover:text-gray-700">×</button>
+            </div>
+            <div id="cart-items" class="flex-1 overflow-auto p-6 space-y-6"></div>
+            <div class="p-6 border-t cart-footer-bg">
+                <div class="flex justify-between text-lg font-medium mb-4">
+                    <span>Total</span>
+                    <span id="cart-total">₹ 0</span>
+                </div>
+                <button onclick="checkoutViaWhatsApp()" 
+                        class="w-full btn-brand text-white py-5 rounded-2xl text-xl font-semibold flex items-center justify-center gap-3 transition">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    PLACE ORDER ON WHATSAPP
+                </button>
+                <p class="text-center text-xs text-gray-500 mt-4">We'll confirm your order & delivery slot within minutes</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Info Modal -->
+    <div id="checkout-modal" class="hidden fixed inset-0 bg-black/60 z-[110] flex items-center justify-center px-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden animate-modal">
+            <div class="p-6 border-b flex justify-between items-center brand-light-bg">
+                <h3 class="text-xl font-bold" style="color: rgba(0, 140, 200, 1);">Almost there! Just a few details</h3>
+                <button onclick="closeCheckoutModal()" class="text-3xl text-gray-600 hover:text-gray-800">×</button>
+            </div>
+            <form id="checkout-form" class="p-6 space-y-5">
+                <div>
+                    <label for="checkout-name" class="block text-sm font-medium text-gray-700 mb-1">Your Name *</label>
+                    <input type="text" id="checkout-name" required autocomplete="name"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-xl outline-none transition">
+                    <p id="checkout-name-error" class="mt-1 text-sm text-red-600 hidden"></p>
+                </div>
+                <div>
+                    <label for="checkout-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                    <input type="tel" id="checkout-phone" required autocomplete="tel"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-xl outline-none transition"
+                           placeholder="9876543210" inputmode="numeric" pattern="[0-9]*">
+                    <p id="checkout-phone-error" class="mt-1 text-sm text-red-600 hidden"></p>
+                </div>
+                <div>
+                    <label for="checkout-address" class="block text-sm font-medium text-gray-700 mb-1">Delivery Address *</label>
+                    <textarea id="checkout-address" rows="4" required autocomplete="street-address"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-xl outline-none transition resize-y"
+                              placeholder="House no, Street, Area, Bijni... Pincode"></textarea>
+                    <p id="checkout-address-error" class="mt-1 text-sm text-red-600 hidden"></p>
+                </div>
+                <button type="submit" id="submit-order-btn"
+                        class="w-full btn-brand text-white py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3 transition">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    Send Order on WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

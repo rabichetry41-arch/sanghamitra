@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap');
+
+/* ── Brand colour token ── */
+:root {
+    --brand: rgba(0, 173, 239, 1);
+    --brand-dark: rgba(0, 140, 200, 1);   /* hover states */
+    --brand-light: rgba(0, 173, 239, 0.12); /* soft backgrounds */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.heading-font {
+    font-family: 'Playfair Display', serif;
+}
+
+.hero-bg {
+    background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.7)), 
+                      url('https://i.ibb.co/SDLx8dwz/group.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Brand colour tint on hero badge */
+.hero-badge {
+    background: rgba(0, 173, 239, 0.25);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 173, 239, 0.4);
+}
+
+.section-bg {
+    background: linear-gradient(135deg, rgba(0, 173, 239, 0.15) 0%, rgba(0, 173, 239, 0.05) 100%);
+}
+
+.card-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-top: 3px solid transparent;
+}
+
+.card-hover:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 25px 50px -12px rgba(0, 173, 239, 0.35);
+    border-top: 3px solid var(--brand);
+}
+
+/* Brand accent underline for section headings */
+.brand-underline::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--brand);
+    border-radius: 2px;
+    margin: 12px auto 0;
+}
+
+/* Brand coloured buttons */
+.btn-brand {
+    background: var(--brand);
+    color: white;
+    transition: background 0.2s ease;
+}
+
+.btn-brand:hover {
+    background: var(--brand-dark);
+}
+
+.btn-brand-outline {
+    border: 2px solid var(--brand);
+    color: var(--brand);
+    transition: all 0.2s ease;
+}
+
+.btn-brand-outline:hover {
+    background: var(--brand);
+    color: white;
+}
+
+/* Links & nav hover */
+.nav-link:hover {
+    color: var(--brand) !important;
+}
+
+/* Modal animations */
+@keyframes modalSlideIn {
+    from { transform: translateY(40px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+
+.animate-modal {
+    animation: modalSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Cart slide from right */
+.cart-modal {
+    animation: slideRight 0.4s ease-out forwards;
+}
+
+@keyframes slideRight {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+}
+
+/* Cart header accent */
+.cart-header {
+    border-bottom: 3px solid var(--brand);
+}
+
+/* Form focus rings */
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--brand) !important;
+    box-shadow: 0 0 0 3px rgba(0, 173, 239, 0.2);
+}
+
+/* Toast */
+.toast {
+    z-index: 9999;
+    pointer-events: none;
+    border-left: 4px solid var(--brand);
+}
+
+/* Button loading state */
+button.loading {
+    pointer-events: none;
+    opacity: 0.8;
+    position: relative;
+}
+
+button.loading::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    width: 18px;
+    height: 18px;
+    border: 3px solid white;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
