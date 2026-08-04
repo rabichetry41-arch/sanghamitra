@@ -21,6 +21,11 @@ const DOM = {
     submitOrderBtn: document.getElementById('submit-order-btn'),
 };
 
+const navLinks = document.querySelectorAll('[data-nav]');
+const sectionsToWatch = ['about', 'products', 'farmers', 'gallery', 'contact']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
 // ==================== PRODUCT DATA ====================
 const products = [
     { id: 1, name: "Fresh Cow Milk",    price: 60,  unit: "litre", img: "https://iili.io/qWUBRII.md.png", desc: "Pure, unadulterated milk collected daily" },
@@ -324,10 +329,55 @@ if (name.length < 5 || !nameRegex.test(name)) {
     }, 300);
 }
 
+// ==================== SCROLL REVEAL ====================
+function initScrollReveal() {
+    const targets = document.querySelectorAll('.reveal');
+    if (!targets.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+        targets.forEach(el => el.classList.add('in-view'));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    targets.forEach(el => observer.observe(el));
+}
+
+// ==================== SCROLL-SPY NAV HIGHLIGHTING ====================
+function initScrollSpy() {
+    if (!navLinks.length || !sectionsToWatch.length || !('IntersectionObserver' in window)) return;
+
+    const spy = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                });
+            }
+        });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+    sectionsToWatch.forEach(section => spy.observe(section));
+}
+
 // ==================== INIT & EVENT LISTENERS ====================
 window.addEventListener('load', () => {
     renderProducts();
     updateCartCount();
+    initScrollReveal();
+    initScrollSpy();
+
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', e => {
@@ -352,6 +402,7 @@ window.addEventListener('load', () => {
         if (e.key === 'Escape') {
             if (!DOM.checkoutModal?.classList.contains('hidden')) closeCheckoutModal();
             else if (!DOM.cartModal?.classList.contains('hidden')) toggleCart();
+            else if (!document.getElementById('mobileMenu')?.classList.contains('hidden')) toggleMobileMenu();
         }
     });
 });
