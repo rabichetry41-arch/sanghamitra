@@ -1,51 +1,92 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
-/* ── Brand colour token ── */
+/* ─────────────────────────────────────────
+   TOKENS
+   Brand blue kept for continuity with the existing
+   logo. Gamosa red is the one accent risk — drawn
+   from the woven red stripe on an Assamese gamosa —
+   used only as a signature thread (dividers, one CTA
+   zone). Leaf green nods to the farms; ink is the
+   dark neutral instead of flat black.
+───────────────────────────────────────────*/
 :root {
-    --brand: rgba(0, 173, 239, 1);
-    --brand-dark: rgba(0, 140, 200, 1);   /* hover states */
-    --brand-light: rgba(0, 173, 239, 0.12); /* soft backgrounds */
+    --brand: #00ADEF;
+    --brand-dark: #0088C8;
+    --brand-tint: rgba(0, 173, 239, 0.09);
+    --ink: #0B3B4A;
+    --cream: #FBF8F1;
+    --cream-deep: #F3EEE1;
+    --gamosa: #BE3A34;
+    --gamosa-dark: #9C2E29;
+    --leaf: #55744A;
+    --leaf-tint: #EEF2E7;
 }
+
+* { scroll-behavior: smooth; }
 
 body {
     font-family: 'Inter', sans-serif;
+    background-color: var(--cream);
+    color: var(--ink);
 }
 
-.heading-font {
-    font-family: 'Playfair Display', serif;
-}
+.heading-font { font-family: 'Playfair Display', serif; }
 
+/* ── Hero ── */
 .hero-bg {
-    background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.7)), 
+    background-image: linear-gradient(rgba(4,20,26,0.55), rgba(4,20,26,0.75)),
                       url('https://i.ibb.co/SDLx8dwz/group.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
+@media (max-width: 768px) {
+    /* fixed backgrounds are janky/unsupported on most mobile browsers */
+    .hero-bg { background-attachment: scroll; }
+}
 
-/* Brand colour tint on hero badge */
 .hero-badge {
-    background: rgba(0, 173, 239, 0.25);
+    background: rgba(255,255,255,0.12);
     backdrop-filter: blur(8px);
-    border: 1px solid rgba(0, 173, 239, 0.4);
+    border: 1px solid rgba(255,255,255,0.35);
 }
 
-.section-bg {
-    background: linear-gradient(135deg, rgba(0, 173, 239, 0.15) 0%, rgba(0, 173, 239, 0.05) 100%);
+.scroll-cue {
+    animation: bob 2.2s ease-in-out infinite;
+}
+@keyframes bob {
+    0%, 100% { transform: translateY(0); opacity: .7; }
+    50% { transform: translateY(8px); opacity: 1; }
 }
 
-.card-hover {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-top: 3px solid transparent;
+/* ── Signature motif: gamosa stripe ── */
+.gamosa-stripe {
+    height: 10px;
+    width: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--gamosa) 0, var(--gamosa) 3px,
+        transparent 3px, transparent 16px
+    );
+}
+.gamosa-stripe.on-dark {
+    background: repeating-linear-gradient(
+        90deg,
+        #E8877F 0, #E8877F 3px,
+        transparent 3px, transparent 16px
+    );
+    opacity: .8;
 }
 
-.card-hover:hover {
-    transform: translateY(-12px) scale(1.03);
-    box-shadow: 0 25px 50px -12px rgba(0, 173, 239, 0.35);
-    border-top: 3px solid var(--brand);
+.gamosa-underline::after {
+    content: '';
+    display: block;
+    width: 64px;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--gamosa) 0 6px, transparent 6px 10px);
+    margin: 14px auto 0;
 }
 
-/* Brand accent underline for section headings */
 .brand-underline::after {
     content: '';
     display: block;
@@ -56,92 +97,166 @@ body {
     margin: 12px auto 0;
 }
 
-/* Brand coloured buttons */
+/* ── Section backgrounds ── */
+.section-cream { background: var(--cream); }
+.section-cream-deep { background: var(--cream-deep); }
+.section-leaf { background: var(--leaf-tint); }
+.section-ink {
+    background: linear-gradient(160deg, var(--ink) 0%, #082A35 100%);
+    color: #F4F7F5;
+}
+
+/* ── Cards ── */
+.card-hover {
+    transition: transform .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1), border-color .4s;
+    border-top: 3px solid transparent;
+}
+.card-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px -12px rgba(0,173,239,.28);
+    border-top: 3px solid var(--brand);
+}
+
+.stat-card {
+    transition: transform .35s ease;
+}
+.stat-card:hover { transform: translateY(-4px); }
+
+.farmer-avatar {
+    background: radial-gradient(circle at 30% 30%, var(--brand) 0%, var(--brand-dark) 100%);
+}
+
+/* ── Gallery ── */
+.gallery-tile {
+    overflow: hidden;
+    position: relative;
+}
+.gallery-tile img {
+    transition: transform .6s cubic-bezier(.4,0,.2,1);
+}
+.gallery-tile:hover img { transform: scale(1.08); }
+.gallery-add {
+    border: 2px dashed rgba(11,59,74,0.25);
+    color: rgba(11,59,74,0.5);
+    transition: border-color .3s, color .3s, background .3s;
+}
+.gallery-add:hover {
+    border-color: var(--brand);
+    color: var(--brand-dark);
+    background: var(--brand-tint);
+}
+
+/* ── Buttons ── */
 .btn-brand {
     background: var(--brand);
     color: white;
-    transition: background 0.2s ease;
+    transition: background .2s ease, transform .15s ease;
 }
+.btn-brand:hover { background: var(--brand-dark); }
+.btn-brand:active { transform: scale(.97); }
 
-.btn-brand:hover {
-    background: var(--brand-dark);
+.btn-gamosa {
+    background: var(--gamosa);
+    color: white;
+    transition: background .2s ease, transform .15s ease;
 }
+.btn-gamosa:hover { background: var(--gamosa-dark); }
+.btn-gamosa:active { transform: scale(.97); }
 
 .btn-brand-outline {
     border: 2px solid var(--brand);
     color: var(--brand);
-    transition: all 0.2s ease;
+    transition: all .2s ease;
 }
+.btn-brand-outline:hover { background: var(--brand); color: white; }
 
-.btn-brand-outline:hover {
+/* ── Nav ── */
+.navbar-bg { background-color: rgba(251,248,241,0.92); backdrop-filter: blur(10px); }
+.nav-link { position: relative; color: var(--ink); }
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -6px;
+    width: 0; height: 2px;
     background: var(--brand);
-    color: white;
+    transition: width .25s ease;
+}
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+.nav-link:hover, .nav-link.active { color: var(--brand-dark) !important; }
+
+.mobile-menu-panel {
+    transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .3s ease;
 }
 
-/* Links & nav hover */
-.nav-link:hover {
-    color: var(--brand) !important;
+/* ── Floating WhatsApp button ── */
+.fab-whatsapp {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 90;
+    background: #25D366;
+    box-shadow: 0 10px 25px rgba(37,211,102,.45);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+.fab-whatsapp:hover { transform: scale(1.08); box-shadow: 0 14px 30px rgba(37,211,102,.55); }
+.fab-whatsapp .ping {
+    position: absolute; inset: 0; border-radius: 9999px;
+    background: #25D366; opacity: .55;
+    animation: ping-slow 2.4s cubic-bezier(0,0,.2,1) infinite;
+}
+@keyframes ping-slow {
+    0% { transform: scale(1); opacity: .55; }
+    75%, 100% { transform: scale(1.9); opacity: 0; }
 }
 
-/* Modal animations */
+/* ── Scroll reveal ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1); }
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+/* ── Modal animations ── */
 @keyframes modalSlideIn {
     from { transform: translateY(40px); opacity: 0; }
     to   { transform: translateY(0);    opacity: 1; }
 }
+.animate-modal { animation: modalSlideIn .35s cubic-bezier(.16,1,.3,1); }
 
-.animate-modal {
-    animation: modalSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Cart slide from right */
-.cart-modal {
-    animation: slideRight 0.4s ease-out forwards;
-}
-
+.cart-modal { animation: slideRight .4s ease-out forwards; }
 @keyframes slideRight {
     from { transform: translateX(100%); }
     to   { transform: translateX(0); }
 }
 
-/* Cart header accent */
-.cart-header {
-    border-bottom: 3px solid var(--brand);
-}
+.cart-header { border-bottom: 3px solid var(--brand); }
 
-/* Form focus rings */
-input:focus,
-textarea:focus {
+input:focus, textarea:focus {
     outline: none;
     border-color: var(--brand) !important;
-    box-shadow: 0 0 0 3px rgba(0, 173, 239, 0.2);
+    box-shadow: 0 0 0 3px rgba(0,173,239,.2);
 }
 
-/* Toast */
-.toast {
-    z-index: 9999;
-    pointer-events: none;
-    border-left: 4px solid var(--brand);
+/* visible keyboard focus everywhere */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
 }
 
-/* Button loading state */
-button.loading {
-    pointer-events: none;
-    opacity: 0.8;
-    position: relative;
-}
-
+button.loading { pointer-events: none; opacity: .8; position: relative; }
 button.loading::after {
     content: '';
-    position: absolute;
-    right: 16px;
-    width: 18px;
-    height: 18px;
-    border: 3px solid white;
-    border-top-color: transparent;
+    position: absolute; right: 16px;
+    width: 18px; height: 18px;
+    border: 3px solid white; border-top-color: transparent;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
+/* ── Small-screen refinements ── */
+@media (max-width: 480px) {
+    .hero-heading { font-size: 3rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+    .reveal { opacity: 1; transform: none; }
 }
